@@ -1,0 +1,34 @@
+Package: halflinger
+Title: Package to train, predict, update  and plot Halfspacemass and Turkeydetph
+Version: 0.0.0.9000
+Authors@R: c(
+    person(given = "Henri",
+           family = "Funk",
+           role = c("aut", "cre"),
+           email = "henrifnk@gmail.com"),
+    person(given = "Fabian",
+           family = "Scheipl", 
+           email = "fabian.scheipl@stat.uni-muenchen.de",
+           role = c("aut")))
+Description: 
+    This package implements "Halfspace Mass" (a data depth) as well as a
+    Monte Carlo-approximate halfspace (Tukey) depth. Therefore it provides a 
+    train function that creates an arbitrary amount of Halfspaces from given 
+    data and extends update, predict and autoplot generics by halfspace methods.
+License: LGPL-3
+Depends:
+    R (>= 3.1.0)
+Imports:
+    ggplot2,
+    rlang
+Suggests:
+    testthat,
+    vdiffr,
+    checkmate,
+    rmarkdown,
+    depth,
+    covr
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.0
