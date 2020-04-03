@@ -4,12 +4,12 @@
 #'     Implementation train algorithm of Chen et al. for adding and changing
 #'     `data` and amount of `halfspaces`.
 #'
-#' @details Functionality after input check can be summed up in 3 main steps:
-#'    ## 1st Step [add_data()] & [prepare_data()]
+#'    Functionality after input check can be summed up in 3 main steps:
+#'    * 1st Step [add_data()] & [prepare_data()]
 #'    check the input on type and scale & prepare data for calculation
-#'    ## 2nd Step [update_halfspaces()]
+#'    * 2nd Step [update_halfspaces()]
 #'    update Halfspaces, already calculated in the input `object`
-#'    ## 3rd Step [add_halfspaces()]
+#'    * 3rd Step [add_halfspaces()]
 #'    get new Halfspaces
 #'
 #' @param object a halfspaces object containing a list arbitrary length of
@@ -18,8 +18,15 @@
 #'     from `object`
 #' @inheritParams train_depth
 #' @param ... ellipsis
-#' @result an updated halfspaces object, reclaculated on an updated dataset
-#'     and/or on a new amount of `n_halfspaces`.
+#' @return an updated halfspaces object, recalculated on an updated dataset
+#'     and or on a new amount of n halfspaces
+#'
+#' @examples
+#'     library(halflinger)
+#'
+#'     data <- matrix(c(rnorm(100), rnorm(100, 1, 5)), ncol = 2)
+#'     train_data <- train_depth(data[51:100, ], n_halfspace = 100, seed = 123)
+#'     update(train_data, data[1:50, ], add = TRUE)
 #'
 #' @references
 #'     Chen, B., Ting, K.M., Washio, T. et al.,
@@ -66,7 +73,7 @@ update.halfspaces <- function(object, data = attr(object, "train_data"),
 #' @inheritParams update.halfspaces
 #' @return A data set with all containing required unique observations to
 #' [train_depth()]
-add_data <- function(train_data, data, add){
+add_data <- function(train_data, data, add) {
 
   if (!add) return(data)
   unique(rbind(train_data, data))
@@ -77,11 +84,11 @@ add_data <- function(train_data, data, add){
 #' @description This function updates the already drawn `halfspaces` of the
 #'     input `object`.
 #'
-#' @details Functionality splits in two scenarios:
-#'    ## Scenario for an unchanged dataset
+#'    Functionality splits in two scenarios:
+#'    * Scenario for an unchanged dataset
 #'    if dataset remains unchanged, halfspace objects are identical, too
 #'    drawn halfspaces are a subset of `object`
-#'    ## Scenario for a changed dataset
+#'    * Scenario for a changed dataset
 #'    if dataset changes, new randomly drawn subsamples are needed which provide
 #'    a new base for splitpoint criteria and mass_above, therefore whole
 #'    <get_halfspaces> needs to be recalled on each direction of the dataset
@@ -108,13 +115,10 @@ update_halfspaces <- function(object, complete_data, n_halfspace, input) {
 }
 
 #' @title Add Halfspaces
-#'
 #' @description This function calculates `n_halfspaces` new halfspaces from
 #' `complete_data`
-#'
 #' @inheritParams update_halfspaces
-#' @result a halfspace object of <n_halfspace> halfspaces
-#'
+#' @return a halfspaces object of n halfspace objects
 #' @seealso [train_depth()]
 add_halfspaces <- function(complete_data, n_halfspace, input) {
 

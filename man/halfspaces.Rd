@@ -21,8 +21,8 @@ validate_halfspaces(object)
 estimation, default = 1}
 
 \item{scope}{minimum 1; controls size of region of convexity for halfspace
-mass (\eqn{\lambda} in the paper) i.e., how far outside of sampled data range
-the sampled hyperplanes can lie; default = 1}
+mass (\eqn{\lambda} in the paper) i.e., how far outside of sampled data
+range the sampled hyperplanes can lie; default = 1}
 
 \item{seed}{optional RNG seed; default = NULL}
 
@@ -30,7 +30,10 @@ the sampled hyperplanes can lie; default = 1}
 }
 \description{
 Define a new S3 class \code{halfspaces}.
-Structure of class definition: interface, constructor, validator.
+Structure of class definition:
+* interface
+* constructor
+* validator
 }
 \section{Functions}{
 \itemize{

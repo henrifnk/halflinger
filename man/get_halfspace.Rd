@@ -15,15 +15,15 @@ get_halfspace(normal, data, subsample, scope)
 estimation, default = 1}
 
 \item{scope}{minimum 1; controls size of region of convexity for halfspace
-mass (\eqn{\lambda} in the paper) i.e., how far outside of sampled data range
-the sampled hyperplanes can lie; default = 1}
+mass (\eqn{\lambda} in the paper) i.e., how far outside of sampled data
+range the sampled hyperplanes can lie; default = 1}
 }
 \value{
 a halfspace object containing a direction, a splitpoint and a
 measure of mass
 }
 \description{
-Project a subsample of <data> on
+Project a subsample of \code{data} on
 the direction, create a splitpoint in the projection and measure the mass
 above the split point vectors
 }

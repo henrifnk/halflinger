@@ -37,7 +37,7 @@ test_that("structure classes", {
 test_that("test scaling", {
   faithful_heat <- generate_plot_faith(scale = TRUE)
   plot_data <- faithful_heat[["data"]]
-  expect_lte(sd(plot_data[,"prediction"]), 1)
+  expect_lte(sd(plot_data[, "prediction"]), 1)
   faith_axis <-
     ggplot2::ggplot_build(faithful_heat)[["layout"]][["panel_params"]][[1]]
   expect_equal(mean(faith_axis[["x.range"]]),
@@ -69,5 +69,5 @@ test_that("test grid input", {
     V2 = seq(30, 110, length = 20)
   )
   faithful_grid <- generate_plot_faith(grid = grid)
-  expect_true(all(faithful_grid[["data"]][ ,1:2] == grid))
+  expect_true(all(faithful_grid[["data"]][, 1:2] == grid))
 })

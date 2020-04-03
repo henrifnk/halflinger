@@ -23,14 +23,19 @@ mass or halfspace depth
 \description{
 Predict-Method to \code{\link[=train_depth]{train_depth()}} for halfspaces objects.
 Evaluates halfspace-mass or (approximate) -depth for points in
-data based
+data based\preformatted{Functionality splits by `metric` in in two main scenarios:
+* Scenario [get_mass()]
+`metric = "mass"` computes approximate halfspace mass
+* Scenario [get_depth()]
+`metric = "depth"` computes approximate halfspace depth ("Tukey depth")
 }
-\details{
-Functionality splits by \code{metric} in in two main scenarios:
-## Scenario \code{\link[=get_mass]{get_mass()}}
-\code{metric = "mass"} computes approximate halfspace mass
-## Scenario \code{\link[=get_depth]{get_depth()}}
-\code{metric = "depth"} computes approximate halfspace depth ("Tukey depth")
+}
+\examples{
+   library(halflinger)
+
+   data <- matrix(c(rnorm(100), rnorm(100, 1, 5)), ncol = 2)
+   train_data <- train_depth(data[51:100, ], n_halfspace = 100, seed = 123)
+   predict(train_data, data[1:50, ])
 }
 \references{
 \preformatted{Chen, B., Ting, K.M., Washio, T. et al.,

@@ -4,10 +4,10 @@
 #'     Evaluates halfspace-mass or (approximate) -depth for points in
 #'     data based
 #'
-#' @details Functionality splits by `metric` in in two main scenarios:
-#'     ## Scenario [get_mass()]
+#'     Functionality splits by `metric` in in two main scenarios:
+#'     * Scenario [get_mass()]
 #'     `metric = "mass"` computes approximate halfspace mass
-#'     ## Scenario [get_depth()]
+#'     * Scenario [get_depth()]
 #'     `metric = "depth"` computes approximate halfspace depth ("Tukey depth")
 #'
 #' @inheritParams update.halfspaces
@@ -16,6 +16,12 @@
 #' @return numeric vector with depth metric values for data: either halfspace
 #' mass or halfspace depth
 #'
+#' @examples
+#'    library(halflinger)
+#'
+#'    data <- matrix(c(rnorm(100), rnorm(100, 1, 5)), ncol = 2)
+#'    train_data <- train_depth(data[51:100, ], n_halfspace = 100, seed = 123)
+#'    predict(train_data, data[1:50, ])
 #' @references
 #'     Chen, B., Ting, K.M., Washio, T. et al.,
 #'     Mach Learn (2015): 100(2):677--699

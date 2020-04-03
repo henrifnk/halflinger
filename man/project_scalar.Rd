@@ -12,12 +12,12 @@ project_scalar(data, normal)
 \item{normal}{a vector of indicating a direction in space}
 }
 \value{
-vector: projections of <data> on <direction> in units of
-"length of <direction>"
+vector: projections of \code{data} on \code{normal} in units of
+"length of \code{normal}"
 }
 \description{
-project data points onto the normal vector defining the orientation
-of a halfspace
+project data points onto the normal vector defining the
+orientation of a halfspace
 }
 \seealso{
 \url{https://en.wikipedia.org/wiki/Scalar_projection}

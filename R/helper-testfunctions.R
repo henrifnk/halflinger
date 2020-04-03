@@ -1,20 +1,16 @@
 #' @title Generate test data
-#'
 #' @description This functions are helpers to unit tests.
-#'
 #' @inheritParams train_depth
 #' @inheritParams autoplot.halfspaces
 #' @param seed0 an additional RNG seed
-#'
 #' @importFrom stats rnorm
-#'
 #' @describeIn generate_train_data generates datasets in order to approve, the
 #'     functionality of [train_depth()], [update.halfspaces()],
 #'     [predict.halfspaces()]
 generate_train_data <- function(n_halfspace = 1e3, subsample = 1, scope = 1,
                                 seed = NULL, scale = FALSE, seed0 = 121133) {
   set.seed(as.integer(seed0))
-  angles <- seq(0, 2*pi, length = 101)[-101]
+  angles <- seq(0, 2 * pi, length = 101)[-101]
   data_list <- list(
     circle = cbind(cos(angles), sin(angles)),
     gaussian = cbind(rnorm(200), rnorm(200)),

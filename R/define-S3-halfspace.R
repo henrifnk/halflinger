@@ -1,8 +1,9 @@
 #' @title Define Class halfspace
-#'
 #' @description Define a new S3 class `halfspace`.
-#'      Structure of class definition: interface, constructor, validator.
-#'
+#'      Structure of class definition:
+#'      * interface
+#'      * constructor
+#'      * validator
 #' @param object a object of class halfspace
 #' @inheritParams get_halfspace
 #' @inheritParams compute_mass

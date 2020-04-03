@@ -1,7 +1,9 @@
 #' @title Define Class halfspaces
-#'
 #' @description Define a new S3 class `halfspaces`.
-#'     Structure of class definition: interface, constructor, validator.
+#'     Structure of class definition:
+#'     * interface
+#'     * constructor
+#'     * validator
 #'
 #' @param object list of arbitrary length containing `halfspace` objects
 #' @param train_data input data in [train_depth()]

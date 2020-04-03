@@ -20,6 +20,6 @@ test_that("expect reproducability only if seed is set", {
   tasks <- generate_train_data(seed = 345)
   for (task in tasks) {
     expect_identical(do.call(train_depth, task), do.call(train_depth, task))
-    expect_false(identical( train_depth(task[[1]]), train_depth(task[[1]])))
+    expect_false(identical(train_depth(task[[1]]), train_depth(task[[1]])))
   }
 })

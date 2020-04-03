@@ -2,7 +2,7 @@
 % Please edit documentation in R/train-halfspacemass-def.R
 \name{prepare_data}
 \alias{prepare_data}
-\title{Function to check and prepare <data> for calculation}
+\title{Function to check and prepare \code{data} for calculation}
 \usage{
 prepare_data(data, scale = FALSE)
 }
@@ -15,5 +15,5 @@ prepare_data(data, scale = FALSE)
 a numeric (scaled) matrix
 }
 \description{
-ensures <data> to be a numeric matrix & scales them if <scale>
+ensures \code{data} to be a numeric matrix & scales them if \code{scale}
 }

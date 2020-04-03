@@ -1,13 +1,13 @@
 #' @title Implements Training algorithm of Chen et al.
 #'
 #' @description Creates an halfspaces objetct of arbitrary length containing
-#'  halfspace objects
+#'     halfspace objects
 #'
-#' @details Functionality after input check can be summed up in two main steps:
-#'     ## 1st Step [get_directions()]
+#'     Functionality after input check can be summed up in two main steps:
+#'     * 1st Step [get_directions()]
 #'     draw n random directions in m-dimensional space where n is
 #'     defined by `n_halfspace` and m is the sum of columns in `data`
-#'     ## 2nd Step [get_halfspace()]
+#'     * 2nd Step [get_halfspace()]
 #'     Iterate over each direction: Project a subsample of `data`
 #'     on the direction, create a splitpoint in the projection and measure the
 #'     mass above the split point (a direction, a splitpoint and a measure of
@@ -18,8 +18,8 @@
 #' @param subsample what proportion of data to use for each halfspace
 #'     estimation, default = 1
 #' @param scope  minimum 1; controls size of region of convexity for halfspace
-#'     mass (\eqn{\lambda} in the paper) i.e., how far outside of sampled data range
-#'     the sampled hyperplanes can lie; default = 1
+#'     mass (\eqn{\lambda} in the paper) i.e., how far outside of sampled data
+#'     range the sampled hyperplanes can lie; default = 1
 #' @param seed optional RNG seed; default = NULL
 #' @param scale logical; wether data should be scaled; default = FALSE
 #' @return a halfspace object of <n_halfspace> halfspaces, defined by their
@@ -27,11 +27,17 @@
 #'     above/below halfspace boundary object attributes contain the input
 #'     arguments for reproducability
 #'
+#' @examples
+#'    library(halflinger)
+#'
+#'    data <- matrix(c(rnorm(100), rnorm(100, 1, 5)), ncol = 2)
+#'    train_data <- train_depth(data, n_halfspace = 100, seed = 123)
+#'
 #' @references
 #'     Chen, B., Ting, K.M., Washio, T. et al.,
 #'     Mach Learn (2015): 100(2):677--699
-#'     Half-space mass a maximally robust and efficient data depth method
-#'     \url{https://doi.org/10.1007/s10994-015-5524-x}
+#'     Half-space mass A maximally robust and efficient data depth method
+#'    \url{https://doi.org/10.1007/s10994-015-5524-x}
 #' @seealso
 #'     [update.halfspaces()], [autoplot.halfspaces()], [predict.halfspaces()]
 #'
@@ -61,8 +67,8 @@ train_depth <- function(data, n_halfspace = 1e3, subsample = 1, scope = 1,
 
 # utilities --------------------------------------------------------------------
 
-#' @title Function to check and prepare <data> for calculation
-#' @description ensures <data> to be a numeric matrix & scales them if <scale>
+#' @title Function to check and prepare `data` for calculation
+#' @description ensures `data` to be a numeric matrix & scales them if `scale`
 #' @inheritParams train_depth
 #' @return a numeric (scaled) matrix
 prepare_data <- function(data, scale = FALSE) {
@@ -76,13 +82,13 @@ prepare_data <- function(data, scale = FALSE) {
   data
 }
 
-#' @title Draw directions in <dim>-dimnesional Space
-#' @description Uniformly sample <n_halfspace> <dim>-dimensional direction
+#' @title Draw directions in `dims`-dimnesional Space
+#' @description Uniformly sample `n_halfspace` `dims`-dimensional direction
 #'     vectors
 #' @inheritParams train_depth
 #' @param dims dimensions of space to draw directions from
 #' @importFrom stats rnorm
-#' @return  a <dims> x <n_halfspace> matrix of <n_halfspace> <dims>-dimensional
+#' @return  a `dims` x `n_halfspace` matrix of `n_halfspace` `dims`-dimensional
 #'     directions
 get_directions <- function(n_halfspace, dims = 2) {
   checkmate::assert_integerish(dims, lower = 2)
@@ -90,7 +96,7 @@ get_directions <- function(n_halfspace, dims = 2) {
 }
 
 #' @title Create a Halfspace
-#' @description Project a subsample of <data> on
+#' @description Project a subsample of `data` on
 #'     the direction, create a splitpoint in the projection and measure the mass
 #'     above the split point vectors
 #' @param normal a vector of indicating a direction in space
@@ -110,7 +116,7 @@ get_halfspace <- function(normal, data, subsample, scope) {
 }
 
 #' @title Create a Subsample
-#' @description creates a subsample of <data>, containing a <subsample>
+#' @description creates a subsample of `data`, containing a `subsample`
 #' proportion of rows in data
 #' @inheritParams get_halfspace
 #' @return  a subsample of rows in data
@@ -124,11 +130,11 @@ subsample <- function(data, subsample = 1) {
 }
 
 #' @title Scalar projection
-#' @description project data points onto the normal vector defining the orientation
-#'     of a halfspace
+#' @description project data points onto the normal vector defining the
+#'     orientation of a halfspace
 #' @inheritParams get_halfspace
-#' @return  vector: projections of <data> on <direction> in units of
-#'     "length of <direction>"
+#' @return  vector: projections of `data` on `normal` in units of
+#'     "length of `normal`"
 #' @seealso  \url{https://en.wikipedia.org/wiki/Scalar_projection}
 project_scalar <- function(data, normal) {
   checkmate::assert_numeric(normal, any.missing = FALSE, min.len = 2)
@@ -142,8 +148,8 @@ project_scalar <- function(data, normal) {
 
 #' @title Draw a Splitpoint
 #' @description sample a splitpoint in span-range of data
-#' @param projections vector: projections of <data> on <direction> in units of
-#'     "length of <direction>"
+#' @param projections vector: projections of `data` on `normal` in units of
+#'     "length of `normal`"
 #' @inheritParams get_halfspace
 #' @importFrom stats runif
 #' @return "offset" of the halfspace boundary along its normal vector

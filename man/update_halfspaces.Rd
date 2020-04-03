@@ -23,17 +23,13 @@ A data set that is ready to update \code{\link[=train_depth]{train_depth()}} on
 \description{
 This function updates the already drawn \code{halfspaces} of the
 input \code{object}.
-}
-\details{
-Functionality splits in two scenarios:
-\subsection{Scenario for an unchanged dataset}{
 
+Functionality splits in two scenarios:
+\itemize{
+\item Scenario for an unchanged dataset
 if dataset remains unchanged, halfspace objects are identical, too
 drawn halfspaces are a subset of \code{object}
-}
-
-\subsection{Scenario for a changed dataset}{
-
+\item Scenario for a changed dataset
 if dataset changes, new randomly drawn subsamples are needed which provide
 a new base for splitpoint criteria and mass_above, therefore whole
 <get_halfspaces> needs to be recalled on each direction of the dataset

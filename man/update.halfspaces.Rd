@@ -25,27 +25,32 @@ from \code{object}}
 
 \item{...}{ellipsis}
 }
+\value{
+an updated halfspaces object, recalculated on an updated dataset
+and or on a new amount of n halfspaces
+}
 \description{
 Update-Method to \code{\link[=train_depth]{train_depth()}} for halfspaces objects.
 Implementation train algorithm of Chen et al. for adding and changing
 \code{data} and amount of \code{halfspaces}.
-}
-\details{
+
 Functionality after input check can be summed up in 3 main steps:
-\subsection{1st Step \code{\link[=add_data]{add_data()}} & \code{\link[=prepare_data]{prepare_data()}}}{
-
+\itemize{
+\item 1st Step \code{\link[=add_data]{add_data()}} & \code{\link[=prepare_data]{prepare_data()}}
 check the input on type and scale & prepare data for calculation
-}
-
-\subsection{2nd Step \code{\link[=update_halfspaces]{update_halfspaces()}}}{
-
+\item 2nd Step \code{\link[=update_halfspaces]{update_halfspaces()}}
 update Halfspaces, already calculated in the input \code{object}
-}
-
-\subsection{3rd Step \code{\link[=add_halfspaces]{add_halfspaces()}}}{
-
+\item 3rd Step \code{\link[=add_halfspaces]{add_halfspaces()}}
 get new Halfspaces
 }
+}
+\examples{
+    library(halflinger)
+
+    data <- matrix(c(rnorm(100), rnorm(100, 1, 5)), ncol = 2)
+    train_data <- train_depth(data[51:100, ], n_halfspace = 100, seed = 123)
+    update(train_data, data[1:50, ], add = TRUE)
+
 }
 \references{
 \preformatted{Chen, B., Ting, K.M., Washio, T. et al.,

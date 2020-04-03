@@ -2,7 +2,7 @@
 % Please edit documentation in R/train-halfspacemass-def.R
 \name{get_directions}
 \alias{get_directions}
-\title{Draw directions in <dim>-dimnesional Space}
+\title{Draw directions in \code{dims}-dimnesional Space}
 \usage{
 get_directions(n_halfspace, dims = 2)
 }
@@ -12,10 +12,10 @@ get_directions(n_halfspace, dims = 2)
 \item{dims}{dimensions of space to draw directions from}
 }
 \value{
-a <dims> x <n_halfspace> matrix of <n_halfspace> <dims>-dimensional
+a \code{dims} x \code{n_halfspace} matrix of \code{n_halfspace} \code{dims}-dimensional
 directions
 }
 \description{
-Uniformly sample <n_halfspace> <dim>-dimensional direction
+Uniformly sample \code{n_halfspace} \code{dims}-dimensional direction
 vectors
 }

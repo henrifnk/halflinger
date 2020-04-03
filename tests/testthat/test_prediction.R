@@ -28,7 +28,7 @@ test_that("compare ranks and check correlation with depth pkg", {
     expect_equivalent(
       rank(approx_depth),
       rank(exact_depth),
-      tol = nrow(data_list$grid[[1]])/20
+      tol = nrow(data_list$grid[[1]]) / 20
     )
   }
 })
@@ -37,12 +37,13 @@ test_that("compare ranks of scaled values with depth pkg", {
   data_list <- generate_train_data()
   for (train in data_list) {
     approx_depth <- my_hsdepth(test = data_list$grid[[1]], train = train[[1]],
-                               n_halfspace = 1e4, scope = 1, seed = 23, scale = TRUE)
+                               n_halfspace = 1e4, scope = 1,
+                               seed = 23, scale = TRUE)
     exact_depth <- hsdepth(test = data_list$grid[[1]], train = train[[1]])
     expect_equivalent(
       rank(approx_depth),
       rank(exact_depth),
-      tol = nrow(data_list$grid[[1]])/20
+      tol = nrow(data_list$grid[[1]]) / 20
     )
   }
 })

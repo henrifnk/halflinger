@@ -29,7 +29,10 @@ split}
 }
 \description{
 Define a new S3 class \code{halfspace}.
-Structure of class definition: interface, constructor, validator.
+Structure of class definition:
+* interface
+* constructor
+* validator
 }
 \section{Functions}{
 \itemize{

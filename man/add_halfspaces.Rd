@@ -14,6 +14,9 @@ observations to \code{\link[=train_depth]{train_depth()}}}
 
 \item{input}{the parameter set an object was trained on}
 }
+\value{
+a halfspaces object of n halfspace objects
+}
 \description{
 This function calculates \code{n_halfspaces} new halfspaces from
 \code{complete_data}

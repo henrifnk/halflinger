@@ -7,8 +7,8 @@
 compute_mass(projections, split)
 }
 \arguments{
-\item{projections}{vector: projections of <data> on <direction> in units of
-"length of <direction>"}
+\item{projections}{vector: projections of \code{data} on \code{normal} in units of
+"length of \code{normal}"}
 
 \item{split}{"offset" of the halfspace boundary along its normal vector}
 }

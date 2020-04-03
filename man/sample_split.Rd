@@ -7,12 +7,12 @@
 sample_split(projections, scope)
 }
 \arguments{
-\item{projections}{vector: projections of <data> on <direction> in units of
-"length of <direction>"}
+\item{projections}{vector: projections of \code{data} on \code{normal} in units of
+"length of \code{normal}"}
 
 \item{scope}{minimum 1; controls size of region of convexity for halfspace
-mass (\eqn{\lambda} in the paper) i.e., how far outside of sampled data range
-the sampled hyperplanes can lie; default = 1}
+mass (\eqn{\lambda} in the paper) i.e., how far outside of sampled data
+range the sampled hyperplanes can lie; default = 1}
 }
 \value{
 "offset" of the halfspace boundary along its normal vector

@@ -3,13 +3,13 @@
 #' @description Autoplot-Method to [train_depth()] for halfspaces objects.
 #'     Plot Halfspace depth/mass in two-dimensional grid
 #'
-#' @details Method generates a additive ggplot object by 2 Steps:
-#'     ## 1st Step [design_grid()]
+#'     Method generates a additive ggplot object by 2 Steps:
+#'     * 1st Step [design_grid()]
 #'     Creates grid, predicts on it and saves it as database in a ggplot object.
-#'     ## 2nd Step [add_tile()] or [add_contour()] and/or [add_points()]
+#'     * 2nd Step [add_tile()] or [add_contour()] and/or [add_points()]
 #'     Adds layers objects tile, contour and points to the grid, by argument
 #'     specification
-#'     ## 3rd Step Labs 'n beauty
+#'     * 3rd Step Labs 'n beauty
 #'     Add lab aspects depending on `metric` for intelligibility and theme for
 #'     beauty to the grid
 #'
@@ -22,6 +22,14 @@
 #'     is ignored if `grid` is not NULL; default =  70L
 #' @describeIn autoplot.halfspaces ggplot2 object; either a heatmap od a
 #'     contour-line-plot in range of the grid
+#'
+#' @examples
+#'     library(halflinger)
+#'
+#'     data <- matrix(c(rnorm(100), rnorm(100, 1, 5)), ncol = 2)
+#'     train_data <- train_depth(data, n_halfspace = 100, seed = 123)
+#'     \dontrun{autoplot.halfspaces(train_data, data, type = "contour")}
+#'
 #' @seealso
 #'     [train_depth()], [update.halfspaces()], [predict.halfspaces()]
 #' @importFrom ggplot2 autoplot
@@ -90,7 +98,7 @@ design_grid <- function(grid, data, gridlength = 70L) {
     grid <- create_grid(data = data, gridlength = gridlength)
     } else checkmate::assert_named(grid, names(data)[1:2])
 
-  ggplot2::ggplot(data = grid, ggplot2::aes(x = grid[,1], y = grid[,2]))
+  ggplot2::ggplot(data = grid, ggplot2::aes(x = grid[, 1], y = grid[, 2]))
 }
 
 #' @describeIn design_grid creates a grid of `gridlength`x`gridlength` Pixels,

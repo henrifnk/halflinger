@@ -34,18 +34,16 @@ is ignored if \code{grid} is not NULL; default =  70L}
 }
 \description{
 Autoplot-Method to \code{\link[=train_depth]{train_depth()}} for halfspaces objects.
-Plot Halfspace depth/mass in two-dimensional grid
-}
-\details{
-Method generates a additive ggplot object by 2 Steps:
-## 1st Step \code{\link[=design_grid]{design_grid()}}
+Plot Halfspace depth/mass in two-dimensional grid\preformatted{Method generates a additive ggplot object by 2 Steps:
+* 1st Step [design_grid()]
 Creates grid, predicts on it and saves it as database in a ggplot object.
-## 2nd Step \code{\link[=add_tile]{add_tile()}} or \code{\link[=add_contour]{add_contour()}} and/or \code{\link[=add_points]{add_points()}}
+* 2nd Step [add_tile()] or [add_contour()] and/or [add_points()]
 Adds layers objects tile, contour and points to the grid, by argument
 specification
-## 3rd Step Labs 'n beauty
-Add lab aspects depending on \code{metric} for intelligibility and theme for
+* 3rd Step Labs 'n beauty
+Add lab aspects depending on `metric` for intelligibility and theme for
 beauty to the grid
+}
 }
 \section{Functions}{
 \itemize{
@@ -53,6 +51,14 @@ beauty to the grid
 contour-line-plot in range of the grid
 }}
 
+\examples{
+    library(halflinger)
+
+    data <- matrix(c(rnorm(100), rnorm(100, 1, 5)), ncol = 2)
+    train_data <- train_depth(data, n_halfspace = 100, seed = 123)
+    \dontrun{autoplot.halfspaces(train_data, data, type = "contour")}
+
+}
 \seealso{
 \preformatted{[train_depth()], [update.halfspaces()], [predict.halfspaces()]
 }

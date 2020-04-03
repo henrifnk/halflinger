@@ -16,6 +16,6 @@ estimation, default = 1}
 a subsample of rows in data
 }
 \description{
-creates a subsample of <data>, containing a <subsample>
+creates a subsample of \code{data}, containing a \code{subsample}
 proportion of rows in data
 }
