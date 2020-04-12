@@ -3,22 +3,22 @@
 
 context("autoplot.halfspaces")
 # Note: I'm aware of using an additional package here but this is the suggested
-# to test on ggplot2 objects. If this is important it can be outcommented here
+# to test on ggplot2 objects. If this is important it can be uncommented here
 # and in Description. See for suggestion:
 # https://ggplot2.tidyverse.org/articles/ggplot2-in-packages.html
-test_that("output of ggplot() is stable", {
-  vdiffr::expect_doppelganger(
-    "contour-scaled-123",
-    generate_plot_faith(points = FALSE, type = "contour",
-                        seed = 123, scale = TRUE)
-  )
-  vdiffr::expect_doppelganger(
-    "heat-unscaled-123", generate_plot_faith(seed = 123)
-  )
-  vdiffr::expect_doppelganger(
-    "contour-depth-123", generate_plot_faith(seed = 123)
-  )
-})
+# test_that("output of ggplot() is stable", {
+#   vdiffr::expect_doppelganger(
+#     "contour-scaled-123",
+#     generate_plot_faith(points = FALSE, type = "contour",
+#                         seed = 123, scale = TRUE)
+#   )
+#   vdiffr::expect_doppelganger(
+#     "heat-unscaled-123", generate_plot_faith(seed = 123)
+#   )
+#   vdiffr::expect_doppelganger(
+#     "contour-depth-123", generate_plot_faith(seed = 123)
+#   )
+# })
 
 test_that("structure classes", {
   faithful_heat <- generate_plot_faith()

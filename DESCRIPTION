@@ -15,6 +15,8 @@ Description:
     Monte Carlo-approximate halfspace (Tukey) depth. Therefore it provides a 
     train function that creates an arbitrary amount of Halfspaces from given 
     data and extends update, predict and autoplot generics by halfspace methods.
+    If you want to use the outcommented vdiffr code from test, add vdiffr to 
+    suggests.
 License: LGPL-3
 Depends:
     R (>= 3.1.0)
@@ -23,11 +25,12 @@ Imports:
     rlang
 Suggests:
     testthat,
-    vdiffr,
     checkmate,
     rmarkdown,
+    knitr,
     depth
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
+VignetteBuilder: knitr

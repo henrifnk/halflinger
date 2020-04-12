@@ -1,0 +1,184 @@
+---
+title: "Vizualize Old Faithful Data"
+author: "Henri Funk"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This is a “Hello World” example for usage on `halflinger`.
+The use case shows how to use the package on the **Old Faithful Geyser** 
+dataset from `R datasets`.
+Thereby a focus is set on Vizualization.
+If you need a review on backround maths of halfspace-mass and/ or Turkey depth 
+checkout the paper
+[Half-space mass](https://link.springer.com/article/10.1007/s10994-015-5524-x)
+and 
+[Tukey Depth](https://www.sciencedirect.com/science/article/pii/S0925772112000594).  
+Lets start and load `halflinger` and `ggplot2`.
+
+```{r bestpkgintheworld}
+library(ggplot2)
+library(halflinger)
+```
+
+## Faithful data
+
+We load the faithful dataset to our environment and inspect the first four rows:
+
+```{r, echo=FALSE, results='asis'}
+faithful <- datasets::faithful
+knitr::kable(head(faithful, 4))
+```
+
+The 'Old Faithful Geyser Data' is a binary dataset showing waiting time between
+eruptions and the duration of the eruption for the Old Faithful geyser in 
+Yellowstone National Park, Wyoming, USA.  
+Note that the scaling between `erruptions` and `waiting` differs quite strong.
+We'll come back to that fact later in this showcase.
+
+For a deeper look inside the data checkout
+[Old Faithful Geyser](https://www.jstor.org/stable/2347385?origin=crossref&seq=1).  
+
+Before we start training we split our data in a training and a test set.
+Our test set contains 50 observations, the training set contains the rest.
+
+```{r split}
+train_ff <- faithful[1:222, ]
+test_ff <- faithful[223:272, ]
+```
+
+In this showcase we try to detect were the most mass of our `test_ff` is gonna 
+be, by training on our `train_ff` dataset.
+
+## Train
+
+Training gets rather simple if you use `halflinger`.
+Due to halfspace depth estimation is a unsupervised task we don't have to set a
+target, nor do we have to estimate the mertic we want to use later.
+We just need to enter the data to `train_depth` and we are gonna set a seed for
+reproducability:
+
+```{r train}
+hs_faithful <- train_depth(train_ff, seed = 123)
+head(hs_faithful, 1)
+```
+
+The object we created is of class `halfspaces` and contains 1000 `halfspace` 
+objects that  got sampled during the training. 
+The snipped above, shows the structure of the first `halfspace` drawn from
+`train_ff` data.
+It consists of a normal vector were data were projected on, a drawn splitpoint,
+and the expected mass from data above that splitpoint.  
+In the attributes of `hs_faithful` in the chunk below, we can find our seed and
+other settings from our call to `train_depth`.
+Note `train_data` is actually also an atrribute of a halfspaces object, but 
+showing them to you twice would be superfluent since we showed you the head of 
+data earlier on in this showcase and would conquer a lot of space. 
+We'll skip them here for convenience, but you can find them as attributes in
+your `halfspaces` object.
+
+```{r attr}
+attributes(hs_faithful)[-1]
+```
+
+## Plot me
+
+Let's vizualize our training progress at this point. 
+We are gonna use the convenient `autoplot` function for objects of class 
+halfspace that is implemented in the package.  
+`autoplot.halfspaces` provides two vizualition methods on two different metrics
+for twodimensional data (datasets with two columns).
+We are able to plot our training progress as **Contour Line Plot** and as 
+**Heatmap**.  
+Both plot types predict the results from our training on a given grid.
+Note that you can use your own grid in `grid`, or define the accuracy of the
+grid by increasing or decreasing `gridlength`.  
+Additionally we can choose between the metrics `Turkey depth` and
+`Halfspace mass`.  
+To compare we will plot `Tukey depth` in contourlines and heat first.
+Note that data is our testset. For now it will have no further usage, we'll rely
+on data later on in this showcase.
+
+
+```{r plot, fig.width=7}
+autoplot(hs_faithful, data = test_ff, metric = "depth", type = "contour", 
+         points = FALSE)
+autoplot(hs_faithful, data = test_ff, metric = "depth", points = FALSE)
+```
+
+Both plots indicate the majority of eruptions for the Old Faithful somewhere
+roundabout 80 minutes of waiting and 4 minutes of erruption.
+The field of depth looks very thin and in deed `Tukey depth` is more likely to 
+assign observations as outliers as it takes the minimum and not the mean of 
+mass from training sets... 
+Maby we just want to extract the really striking cases from future observations.
+So lets assume that for some practical reason we want to have a broader field of
+depth, were observations are not assigned as outliers that aggresively.  
+In this case we should choose `Halfspace Mass` in prediction.
+So lets plot the same two plot types on `Halfspace Mass` metric...
+
+```{r plotII, fig.width=7}
+autoplot(hs_faithful, data = test_ff, type = "contour", points = FALSE)
+autoplot(hs_faithful, data = test_ff, points = FALSE)
+```
+
+... and run into a bug. 
+Given a grid that generously covers the full range of our data scales how can 
+that plot show an enormous mass at the ends of our scale?  
+The answer is found in maths behind the calculation.
+While `Tukey depth` simply extracts a minimum estimation `Halfspace Mass` is 
+avereging.
+In this proccess different scales from the features get lost.
+`Halfspace Mass` has a problem handeling data with different scales.  
+
+## Scale the bugs out
+
+`halflinger` provides a simple feature to solve that issue by scaling the input 
+data.
+Lets take a step back rerun our training with one little difference.
+We set the scale argument in `train_depth` to `TRUE` and plot the data again.
+Note, that from now on we will use only contourline plot since both provide the
+same results in different kinds of vizualization.
+We are adding the points from our training set to the plot by adding training
+set as `data` agrument to `autoplot`.
+
+```{r trainII, fig.width=7}
+scale_faithful <- train_depth(train_ff, scale = TRUE, seed = 123)
+autoplot(scale_faithful, data = train_ff, type = "contour")
+```
+
+The plot seems to predict depth quite well now.
+We can see two groups of points in the plot.
+The thickest mass is were we find the most points and streches towards the
+second group of points.
+Still we see that halfspace might have done better in estimating the second
+group.
+
+## Testing our plot
+
+Lets see how good our model works.
+We're gonna plot the points from our holdout in the beginning into the grid.
+
+```{r predict, fig.width=7}
+autoplot(scale_faithful, data = test_ff, type = "contour")
+```
+
+We can see the same benefits and downsides that we could have already guessed
+from the test set. 
+`Halfspace Mass` does a pretty good job on predicting the upper right cluster.
+The erruptions occure after a longer wating time and last for a longer time.
+Still it seems to perform worse predictiong the second cluster since it assumes
+the data to have only on modus.
+Due to its streching towards the data, the model does not fail completely in
+prediction but it failes here to identify the second modus in data distribution.

@@ -1,7 +1,7 @@
 #' @details
 #' For further information brows main functions
 #' [train_depth()], [update.halfspaces()], [predict.halfspaces()] and
-#' [autoplot.halfspaces()].
+#' [autoplot.halfspaces()] or check out the vignette.
 #' @references
 #' Chen, B., Ting, K.M., Washio, T. et al.,
 #' Mach Learn (2015): 100(2):677--699

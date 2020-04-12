@@ -10,11 +10,13 @@ This package implements "Halfspace Mass" (a data depth) as well as a
     Monte Carlo-approximate halfspace (Tukey) depth. Therefore it provides a 
     train function that creates an arbitrary amount of Halfspaces from given 
     data and extends update, predict and autoplot generics by halfspace methods.
+    If you want to use the outcommented vdiffr code from test, add vdiffr to 
+    suggests.
 }
 \details{
 For further information brows main functions
 \code{\link[=train_depth]{train_depth()}}, \code{\link[=update.halfspaces]{update.halfspaces()}}, \code{\link[=predict.halfspaces]{predict.halfspaces()}} and
-\code{\link[=autoplot.halfspaces]{autoplot.halfspaces()}}.
+\code{\link[=autoplot.halfspaces]{autoplot.halfspaces()}} or check out the vignette.
 }
 \references{
 Chen, B., Ting, K.M., Washio, T. et al.,
