@@ -4,7 +4,7 @@
 \alias{halfspaces}
 \alias{new_halfspaces}
 \alias{validate_halfspaces}
-\title{Define Class halfspaces}
+\title{Define S3-class halfspaces}
 \usage{
 halfspaces(object, train_data, subsample, scope, seed, scale)
 
@@ -17,10 +17,9 @@ validate_halfspaces(object)
 
 \item{train_data}{input data in \code{\link[=train_depth]{train_depth()}}}
 
-\item{subsample}{what proportion of data to use for each halfspace
-estimation, default = 1}
+\item{subsample}{what proportion of data to use for each \code{\link[=halfspace]{halfspace()}} estimation, default = 1}
 
-\item{scope}{minimum 1; controls size of region of convexity for halfspace
+\item{scope}{minimum 1; controls size of region of convexity for \code{\link[=halfspace]{halfspace()}}
 mass (\eqn{\lambda} in the paper) i.e., how far outside of sampled data
 range the sampled hyperplanes can lie; default = 1}
 
@@ -31,18 +30,20 @@ range the sampled hyperplanes can lie; default = 1}
 \description{
 Define a new S3 class \code{halfspaces}.
 Structure of class definition:
-* interface
-* constructor
-* validator
+\itemize{
+\item interface
+\item constructor
+\item validator
+}
 }
 \section{Functions}{
 \itemize{
-\item \code{halfspaces}: Attributes of this objects are all neccesary Arguments from
+\item \code{halfspaces}: Attributes of this objects are all neccesary arguments from
 \code{\link[=train_depth]{train_depth()}} to reproduce the sample if a seed is supplied
 
-\item \code{new_halfspaces}: a low level constructor for class halfspace
+\item \code{new_halfspaces}: a low level constructor for class halfspaces
 
-\item \code{validate_halfspaces}: validate structur of halfspace object
+\item \code{validate_halfspaces}: validate structure of halfspaces object
 }}
 
 \seealso{

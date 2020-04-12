@@ -1,37 +1,38 @@
 #' @title Plot 2D-Halfspace depth/mass
 #'
-#' @description Autoplot-Method to [train_depth()] for halfspaces objects.
-#'     Plot Halfspace depth/mass in two-dimensional grid
+#' @description
+#' Autoplot-Method to [train_depth()] for [halfspaces()] objects.
+#' Plot Halfspace depth/mass in two-dimensional grid.
 #'
-#'     Method generates a additive ggplot object by 2 Steps:
-#'     * 1st Step [design_grid()]
-#'     Creates grid, predicts on it and saves it as database in a ggplot object.
-#'     * 2nd Step [add_tile()] or [add_contour()] and/or [add_points()]
-#'     Adds layers objects tile, contour and points to the grid, by argument
-#'     specification
-#'     * 3rd Step Labs 'n beauty
-#'     Add lab aspects depending on `metric` for intelligibility and theme for
-#'     beauty to the grid
+#' Method generates a ggplot object by 3 Steps:
+#' * 1st Step [design_grid()]:
+#' Creates grid, predicts on it and saves it as database in a ggplot object.
+#' * 2nd Step [add_tile()] or [add_contour()] and/or [add_points()]:
+#' Adds layers objects tile, contour and points to the grid, by argument
+#' specification
+#' * 3rd Step Labs 'n beauty:
+#' Add lab aspects depending on `metric` for intelligibility and theme for
+#' beauty to the grid
 #'
 #' @inheritParams predict.halfspaces
 #' @param points logical; should datapoints be plotted? default = TRUE
-#' @param type char; choice between "heatmap" and "contour lines"
-#' @param grid numeric dataframe or matrix defining the grid to plot at;
-#'     default = NULL
+#' @param type char; choice between "heatmap" and "contour lines" plot
+#' @param grid numeric dataframe or matrix defining the grid to plot at,
+#'             grid must contain the same colnames as data; default = NULL
 #' @param gridlength integer indicating grid length, to compute a grid on,
 #'     is ignored if `grid` is not NULL; default =  70L
-#' @describeIn autoplot.halfspaces ggplot2 object; either a heatmap od a
-#'     contour-line-plot in range of the grid
+#' @return ggplot2 object; either a heatmap or a contour-line-plot in range of
+#'     the grid
 #'
 #' @examples
-#'     library(halflinger)
+#' library(halflinger)
 #'
-#'     data <- matrix(c(rnorm(100), rnorm(100, 1, 5)), ncol = 2)
-#'     train_data <- train_depth(data, n_halfspace = 100, seed = 123)
-#'     \dontrun{autoplot.halfspaces(train_data, data, type = "contour")}
+#' data <- matrix(c(rnorm(100), rnorm(100, 1, 5)), ncol = 2)
+#' train_data <- train_depth(data, n_halfspace = 100, seed = 123)
+#' \dontrun{autoplot.halfspaces(train_data, data, type = "contour")}
 #'
 #' @seealso
-#'     [train_depth()], [update.halfspaces()], [predict.halfspaces()]
+#' [train_depth()], [update.halfspaces()], [predict.halfspaces()]
 #' @importFrom ggplot2 autoplot
 #' @importFrom stats predict
 #' @export
@@ -43,6 +44,8 @@ autoplot.halfspaces <- function(object, data, metric = c("mass", "depth"),
   checkmate::assert_integerish(gridlength, len = 1, any.missing = FALSE)
   type <- match.arg(type)
   metric <- match.arg(metric)
+  # Information if data have been scaled due to training in caption
+  # Information about plot type is used in subtitle
   caption <- NULL
   subtitle <- NULL
 
@@ -90,6 +93,7 @@ autoplot.halfspaces <- function(object, data, metric = c("mass", "depth"),
 #' @inheritParams autoplot.halfspaces
 #' @describeIn design_grid assigns a two dimensional grid as database of a
 #'     ggplot object
+#' @seealso [autoplot.halfspaces()]
 design_grid <- function(grid, data, gridlength = 70L) {
 
   data <- prepare_data(data = data)
@@ -101,10 +105,11 @@ design_grid <- function(grid, data, gridlength = 70L) {
   ggplot2::ggplot(data = grid, ggplot2::aes(x = grid[, 1], y = grid[, 2]))
 }
 
-#' @describeIn design_grid creates a grid of `gridlength`x`gridlength` Pixels,
-#'     where the range of the each axis corresponds to the range of the `data`
-#'     columns. The first column is plotted on the x-axis, the second on the
-#'     y-axis.
+#' @describeIn
+#' design_grid creates a grid of (`gridlength`x`gridlength`) pixels,
+#' where the range of each axis corresponds to the range of the `data`
+#' columns. The first column is plotted on the x-axis, the second on the
+#' y-axis.
 create_grid <- function(data, gridlength = 70L) {
   range_1 <- range(data[, 1])
   range_2 <- range(data[, 2])
@@ -129,6 +134,7 @@ create_grid <- function(data, gridlength = 70L) {
 #' @describeIn add_tile adds geom_tile layer to the plot with spectral colours
 #'     Supplements a third dimension to the plot by fill and colour aesthetics
 #' @importFrom rlang .data
+#' @seealso [autoplot.halfspaces()]
 add_tile <- function(gg_grid) {
 
   spectralcolors <- c(
@@ -144,9 +150,10 @@ add_tile <- function(gg_grid) {
     ggplot2::scale_colour_gradientn(colors = spectralcolors)
 }
 
-#' @describeIn add_tile adds geom_contour_filled layer to the plot.
-#'     Supplements a third dimension to the plot by vizualized in coloured
-#'     contour-lines
+#' @describeIn
+#' add_tile adds geom_contour_filled layer to the plot.
+#' Supplements a third dimension to the plot by vizualizing coloured
+#' contour-lines
 #' @importFrom rlang .data
 add_contour <- function(gg_grid) {
 
@@ -154,8 +161,9 @@ add_contour <- function(gg_grid) {
     ggplot2::geom_contour_filled(ggplot2::aes(z = .data[["prediction"]]))
 }
 
-#' @describeIn add_tile adds geom_point layer to the plot.
-#'     Supplements the plot by vizualizing points from trained data in the grid.
+#' @describeIn
+#' add_tile adds geom_point layer to the plot.
+#' Supplements the plot by vizualizing points from trained data in the grid.
 add_points <- function(data, gg_grid) {
 
   if (inherits(data, "matrix")) data <- as.data.frame(data)

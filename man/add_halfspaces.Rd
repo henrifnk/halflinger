@@ -22,5 +22,5 @@ This function calculates \code{n_halfspaces} new halfspaces from
 \code{complete_data}
 }
 \seealso{
-\code{\link[=train_depth]{train_depth()}}
+\code{\link[=update.halfspaces]{update.halfspaces()}}, \code{\link[=train_depth]{train_depth()}}
 }

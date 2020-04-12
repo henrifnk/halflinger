@@ -26,10 +26,13 @@ Adds layers tile, contour and/or points to the grid.
 Supplements a third dimension to the plot by fill and colour aesthetics
 
 \item \code{add_contour}: adds geom_contour_filled layer to the plot.
-Supplements a third dimension to the plot by vizualized in coloured
+Supplements a third dimension to the plot by vizualizing coloured
 contour-lines
 
 \item \code{add_points}: adds geom_point layer to the plot.
 Supplements the plot by vizualizing points from trained data in the grid.
 }}
 
+\seealso{
+\code{\link[=autoplot.halfspaces]{autoplot.halfspaces()}}
+}

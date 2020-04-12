@@ -17,3 +17,7 @@ a numeric (scaled) matrix
 \description{
 ensures \code{data} to be a numeric matrix & scales them if \code{scale}
 }
+\seealso{
+\code{\link[=train_depth]{train_depth()}}, \code{\link[=update.halfspaces]{update.halfspaces()}}, \code{\link[=autoplot.halfspaces]{autoplot.halfspaces()}} and
+\code{\link[=predict.halfspaces]{predict.halfspaces()}}
+}

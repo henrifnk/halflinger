@@ -12,18 +12,15 @@ This package implements "Halfspace Mass" (a data depth) as well as a
     data and extends update, predict and autoplot generics by halfspace methods.
 }
 \details{
-\preformatted{For further information brows main functions
-[train_depth()], [halflinger::update.halfspaces()],
-[halflinger::predict.halfspaces()], [halflinger::autoplot.halfspaces()].
-Otherwise refer to the vignettes to see how to format the documentation.
-}
+For further information brows main functions
+\code{\link[=train_depth]{train_depth()}}, \code{\link[=update.halfspaces]{update.halfspaces()}}, \code{\link[=predict.halfspaces]{predict.halfspaces()}} and
+\code{\link[=autoplot.halfspaces]{autoplot.halfspaces()}}.
 }
 \references{
-\preformatted{Chen, B., Ting, K.M., Washio, T. et al.,
+Chen, B., Ting, K.M., Washio, T. et al.,
 Mach Learn (2015): 100(2):677--699
 Half-space mass a maximally robust and efficient data depth method
 \url{https://doi.org/10.1007/s10994-015-5524-x}
-}
 }
 \author{
 \strong{Maintainer}: Henri Funk \email{henrifnk@gmail.com}

@@ -11,15 +11,18 @@ add_data(train_data, data, add)
 
 \item{data}{numeric matrix or dataframe; \strong{rows} are vectors to project}
 
-\item{add}{logical, indicating wether \code{data} should be added to \code{train_data}
-from \code{object}}
+\item{add}{logical, indicating wether \code{data} should be added to \code{train_data} from
+\code{object}}
 }
 \value{
-A data set with all containing required unique observations to
-\code{\link[=train_depth]{train_depth()}}
+A data set containing all required unique observations from training
+in \code{\link[=train_depth]{train_depth()}}
 }
 \description{
 This function takes the observations from train data and the
-observations from input data and returns their union amount if add is set to
-TRUE; in addtion add_data formats the \code{data}.
+observations from input data and returns their union quntity if add is set to
+TRUE; in addtion add_data formats \code{data}.
+}
+\seealso{
+\code{\link[=update.halfspaces]{update.halfspaces()}}
 }

@@ -10,8 +10,8 @@ design_grid(grid, data, gridlength = 70L)
 create_grid(data, gridlength = 70L)
 }
 \arguments{
-\item{grid}{numeric dataframe or matrix defining the grid to plot at;
-default = NULL}
+\item{grid}{numeric dataframe or matrix defining the grid to plot at,
+grid must contain the same colnames as data; default = NULL}
 
 \item{data}{numeric matrix or dataframe; \strong{rows} are vectors to project}
 
@@ -27,9 +27,12 @@ Designs a 2 column grid as database for a gg_plot object, if
 \item \code{design_grid}: assigns a two dimensional grid as database of a
 ggplot object
 
-\item \code{create_grid}: creates a grid of \code{gridlength}x\code{gridlength} Pixels,
-where the range of the each axis corresponds to the range of the \code{data}
+\item \code{create_grid}: creates a grid of (\code{gridlength}x\code{gridlength}) pixels,
+where the range of each axis corresponds to the range of the \code{data}
 columns. The first column is plotted on the x-axis, the second on the
 y-axis.
 }}
 
+\seealso{
+\code{\link[=autoplot.halfspaces]{autoplot.halfspaces()}}
+}

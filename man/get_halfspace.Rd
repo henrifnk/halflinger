@@ -2,28 +2,63 @@
 % Please edit documentation in R/train-halfspacemass-def.R
 \name{get_halfspace}
 \alias{get_halfspace}
+\alias{subsample}
+\alias{project_scalar}
+\alias{sample_split}
+\alias{compute_mass}
 \title{Create a Halfspace}
 \usage{
 get_halfspace(normal, data, subsample, scope)
+
+subsample(data, subsample = 1)
+
+project_scalar(data, normal)
+
+sample_split(projections, scope)
+
+compute_mass(projections, split)
 }
 \arguments{
-\item{normal}{a vector of indicating a direction in space}
+\item{normal}{a vector indicating a direction in space}
 
 \item{data}{numeric matrix or dataframe; \strong{rows} are vectors to project}
 
-\item{subsample}{what proportion of data to use for each halfspace
-estimation, default = 1}
+\item{subsample}{what proportion of data to use for each \code{\link[=halfspace]{halfspace()}} estimation, default = 1}
 
-\item{scope}{minimum 1; controls size of region of convexity for halfspace
+\item{scope}{minimum 1; controls size of region of convexity for \code{\link[=halfspace]{halfspace()}}
 mass (\eqn{\lambda} in the paper) i.e., how far outside of sampled data
 range the sampled hyperplanes can lie; default = 1}
-}
-\value{
-a halfspace object containing a direction, a splitpoint and a
-measure of mass
+
+\item{projections}{output from \code{\link[=project_scalar]{project_scalar()}}}
+
+\item{split}{output from \code{\link[=sample_split]{sample_split()}}}
 }
 \description{
 Project a subsample of \code{data} on
 the direction, create a splitpoint in the projection and measure the mass
 above the split point vectors
+}
+\section{Functions}{
+\itemize{
+\item \code{get_halfspace}: a \code{\link[=halfspace]{halfspace()}} object containing a direction, a splitpoint and a measure of
+mass
+
+\item \code{subsample}: subfunction to \code{get_halfspaces};
+creates subsample of \code{data}, defined by \code{subsample} proportion of rows in
+\code{data}
+
+\item \code{project_scalar}: subfunction to \code{get_halfspaces}; vector:
+projections of \code{data} on \code{normal} in units of "length of \code{normal}"
+
+\item \code{sample_split}: subfunction to \code{get_halfspaces}; "offset" of the halfspace boundary along
+its normal vector. Output is drawn from range. Configure range by \code{scope}.
+
+\item \code{compute_mass}: subfunction to \code{get_halfspaces}; a vector with relative data frequency
+"at or above" the boundary in \code{projections} defined by \code{split}
+}}
+
+\seealso{
+\code{\link[=train_depth]{train_depth()}}
+
+\url{https://en.wikipedia.org/wiki/Scalar_projection}
 }

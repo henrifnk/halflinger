@@ -4,9 +4,10 @@
 #' @inheritParams autoplot.halfspaces
 #' @param seed0 an additional RNG seed
 #' @importFrom stats rnorm
-#' @describeIn generate_train_data generates datasets in order to approve, the
-#'     functionality of [train_depth()], [update.halfspaces()],
-#'     [predict.halfspaces()]
+#' @describeIn
+#' generate_train_data generates datasets in order to approve, the
+#' functionality of [train_depth()], [update.halfspaces()] &
+#' [predict.halfspaces()]
 generate_train_data <- function(n_halfspace = 1e3, subsample = 1, scope = 1,
                                 seed = NULL, scale = FALSE, seed0 = 121133) {
   set.seed(as.integer(seed0))
@@ -24,9 +25,10 @@ generate_train_data <- function(n_halfspace = 1e3, subsample = 1, scope = 1,
   })
 }
 
-#' @describeIn generate_train_data possibility to tune over all defaults of
-#'     tain_depth and autoplot.halfspaces to approve the functionality of
-#'     [autoplot.halfspaces()]
+#' @describeIn
+#' generate_train_data possibility to tune over all defaults of
+#' tain_depth and autoplot.halfspaces to approve the functionality of
+#' [autoplot.halfspaces()]
 generate_plot_faith <- function(n_halfspace = 1e4, subsample = 1, scope = 1,
                                 seed = NULL, scale = FALSE,
                                 metric = c("mass", "depth"), points = TRUE,

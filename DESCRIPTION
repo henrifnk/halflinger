@@ -1,6 +1,6 @@
 Package: halflinger
 Title: Package to train, predict, update  and plot Halfspacemass and Turkeydetph
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: c(
     person(given = "Henri",
            family = "Funk",

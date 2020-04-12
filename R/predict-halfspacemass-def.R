@@ -1,34 +1,35 @@
 #' @title Test algorithm of Chen et al.
 #'
-#' @description Predict-Method to [train_depth()] for halfspaces objects.
-#'     Evaluates halfspace-mass or (approximate) -depth for points in
-#'     data based
+#' @description
+#' Predict-Method to [train_depth()] for [halfspaces()] objects.
+#' Evaluates halfspace-mass or (approximate) -depth for points in `data`
 #'
-#'     Functionality splits by `metric` in in two main scenarios:
-#'     * Scenario [get_mass()]
-#'     `metric = "mass"` computes approximate halfspace mass
-#'     * Scenario [get_depth()]
-#'     `metric = "depth"` computes approximate halfspace depth ("Tukey depth")
+#' Functionality splits by `metric` in in two main scenarios:
+#' * Scenario [get_mass()]:
+#' `metric = "mass"` computes approximate halfspace mass
+#' * Scenario [get_depth()]:
+#' `metric = "depth"` computes approximate halfspace depth ("Tukey depth")
 #'
 #' @inheritParams update.halfspaces
 #' @param metric default = "mass", alternative "depth"
 #' @param ... ellipsis
-#' @return numeric vector with depth metric values for data: either halfspace
+#' @return
+#' numeric vector with depth metric values for data: either halfspace
 #' mass or halfspace depth
 #'
 #' @examples
-#'    library(halflinger)
+#' library(halflinger)
 #'
-#'    data <- matrix(c(rnorm(100), rnorm(100, 1, 5)), ncol = 2)
-#'    train_data <- train_depth(data[51:100, ], n_halfspace = 100, seed = 123)
-#'    predict(train_data, data[1:50, ])
+#' data <- matrix(c(rnorm(100), rnorm(100, 1, 5)), ncol = 2)
+#' train_data <- train_depth(data[51:100, ], n_halfspace = 100, seed = 123)
+#' predict(train_data, data[1:50, ])
 #' @references
-#'     Chen, B., Ting, K.M., Washio, T. et al.,
-#'     Mach Learn (2015): 100(2):677--699
-#'     Half-space mass a maximally robust and efficient data depth method
-#'     \url{https://doi.org/10.1007/s10994-015-5524-x}
+#' Chen, B., Ting, K.M., Washio, T. et al.,
+#' Mach Learn (2015): 100(2):677--699
+#' Half-space mass a maximally robust and efficient data depth method
+#' \url{https://doi.org/10.1007/s10994-015-5524-x}
 #' @seealso
-#'     [train_depth()], [update.halfspaces()], [autoplot.halfspaces()]
+#' [train_depth()], [update.halfspaces()], [autoplot.halfspaces()]
 #'
 #' @export
 predict.halfspaces <- function(object, data, metric = c("mass", "depth"), ...) {
@@ -51,10 +52,12 @@ predict.halfspaces <- function(object, data, metric = c("mass", "depth"), ...) {
 #' @description These functions calculate a prediction on depth/mass of data
 #'
 #' @inheritParams predict.halfspaces
-#' @describeIn get_mass numeric vector with halfspace mass values for data
-#'         for each combination of a halfspace and a data point, the algorithm
-#'         uses the mass on the side of the split which the data point lies
-#'         on, standardizes the input and takes the mean
+#' @describeIn
+#' get_mass numeric vector with halfspace mass values for data
+#' for each combination of a halfspace and a data point, the algorithm
+#' uses the mass on the side of the split which the data point lies
+#' on, standardizes the input and takes the mean
+#' @seealso [predict.halfspaces()]
 get_mass <- function(data, object) {
   # init in 0 to iteratively add mean mass
   result <- numeric(NROW(data))
@@ -71,9 +74,10 @@ get_mass <- function(data, object) {
   result / length(object)
 }
 
-#' @describeIn get_mass numeric vector with halfspace depth values for data
-#'     initialized in 1 the algorithm iteratively searches in each halfspace
-#'     for the minimal masses of each observation
+#' @describeIn
+#' get_mass numeric vector with halfspace depth values for data
+#' initialized in 1 the algorithm iteratively searches in each halfspace
+#' for the minimal masses of each observation
 get_depth <- function(data, object) {
 
   result <- rep(1, NROW(data))

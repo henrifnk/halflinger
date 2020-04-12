@@ -13,51 +13,51 @@
 )
 }
 \arguments{
-\item{object}{a halfspaces object containing a list arbitrary length of
-halfspace objects.}
+\item{object}{a \code{\link[=halfspaces]{halfspaces()}} object containing a list arbitrary length of
+\code{\link[=halfspace]{halfspace()}} objects.}
 
 \item{data}{numeric matrix or dataframe; \strong{rows} are vectors to project}
 
 \item{n_halfspace}{number of halfsspaces to draw, default = 1e4}
 
-\item{add}{logical, indicating wether \code{data} should be added to \code{train_data}
-from \code{object}}
+\item{add}{logical, indicating wether \code{data} should be added to \code{train_data} from
+\code{object}}
 
 \item{...}{ellipsis}
 }
 \value{
-an updated halfspaces object, recalculated on an updated dataset
-and or on a new amount of n halfspaces
+an updated \code{\link[=halfspaces]{halfspaces()}} object, recalculated on an updated dataset
+and/or on a new amount of n \code{\link[=halfspaces]{halfspaces()}}
 }
 \description{
-Update-Method to \code{\link[=train_depth]{train_depth()}} for halfspaces objects.
-Implementation train algorithm of Chen et al. for adding and changing
+Update-Method to \code{\link[=train_depth]{train_depth()}} for \code{\link[=halfspaces]{halfspaces()}} objects.
+Implements train algorithm of Chen et al. for adding and changing
 \code{data} and amount of \code{halfspaces}.
 
-Functionality after input check can be summed up in 3 main steps:
+Functionality in 3 main steps:
 \itemize{
-\item 1st Step \code{\link[=add_data]{add_data()}} & \code{\link[=prepare_data]{prepare_data()}}
+\item 1st Step \code{\link[=add_data]{add_data()}} & \code{\link[=prepare_data]{prepare_data()}}:
 check the input on type and scale & prepare data for calculation
-\item 2nd Step \code{\link[=update_halfspaces]{update_halfspaces()}}
-update Halfspaces, already calculated in the input \code{object}
-\item 3rd Step \code{\link[=add_halfspaces]{add_halfspaces()}}
-get new Halfspaces
+\item 2nd Step \code{\link[=update_halfspaces]{update_halfspaces()}}:
+update \code{\link[=halfspaces]{halfspaces()}}, that were already calculated in the input \code{object}
+\item 3rd Step \code{\link[=add_halfspaces]{add_halfspaces()}}:
+get additional \code{\link[=halfspaces]{halfspaces()}} and add them to the updated \code{\link[=halfspace]{halfspace()}}
+objects
 }
 }
 \examples{
-    library(halflinger)
+library(halflinger)
 
-    data <- matrix(c(rnorm(100), rnorm(100, 1, 5)), ncol = 2)
-    train_data <- train_depth(data[51:100, ], n_halfspace = 100, seed = 123)
-    update(train_data, data[1:50, ], add = TRUE)
+data <- matrix(c(rnorm(100), rnorm(100, 1, 5)), ncol = 2)
+train_data <- train_depth(data[51:100, ], n_halfspace = 100, seed = 123)
+update(train_data, data[1:50, ], add = TRUE)
 
 }
 \references{
-\preformatted{Chen, B., Ting, K.M., Washio, T. et al.,
+Chen, B., Ting, K.M., Washio, T. et al.,
 Mach Learn (2015): 100(2):677--699
 Half-space mass a maximally robust and efficient data depth method
 \url{https://doi.org/10.1007/s10994-015-5524-x}
-}
 }
 \seealso{
 \code{\link[=train_depth]{train_depth()}}, \code{\link[=autoplot.halfspaces]{autoplot.halfspaces()}}, \code{\link[=predict.halfspaces]{predict.halfspaces()}}

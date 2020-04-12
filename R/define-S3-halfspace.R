@@ -1,18 +1,20 @@
-#' @title Define Class halfspace
-#' @description Define a new S3 class `halfspace`.
-#'      Structure of class definition:
-#'      * interface
-#'      * constructor
-#'      * validator
+#' @title Define S3-class halfspace
+#' @description
+#' Define a new S3 class `halfspace`.
+#' Structure of class definition:
+#' * interface
+#' * constructor
+#' * validator
 #' @param object a object of class halfspace
 #' @inheritParams get_halfspace
 #' @inheritParams compute_mass
 #' @param mass_above a vector with relative data frequency "at or above" the
 #'     split
 #' @param col_data dimesions of the space that halfspace lives in
-#' @describeIn halfspace a halfspace object containing a direction, a splitpoint
-#'     and a measure of mass [train_depth()], [update.halfspaces()],
-#'     [predict.halfspaces()]
+#' @describeIn
+#' halfspace a halfspace object containing a direction, a splitpoint
+#' and a measure of mass [train_depth()], [update.halfspaces()],
+#' [predict.halfspaces()]
 #'
 #' @seealso [get_halfspace()], [halfspaces()]
 halfspace <- function(normal, split, mass_above, col_data) {
@@ -43,7 +45,7 @@ is_halfspace <- function(object, col_data) {
 }
 
 
-#' @describeIn halfspace validate structur of halfspace object
+#' @describeIn halfspace validate structure of halfspace object
 validate_halfspace <- function(object, col_data) {
   if (!is_halfspace(object = object, col_data = col_data)) {
     stop("Halfspace is not in correct format.")

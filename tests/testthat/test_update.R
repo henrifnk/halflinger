@@ -25,16 +25,6 @@ test_that("check for reproducability in train_depth", {
     trained_hs <- do.call(train_depth, task)
     updated_hs <- update(trained_hs, data)
     expect_identical(trained_hs, updated_hs)
-
-    warning1 <- "Output Object contains a subset of the Input Object"
-    expect_warning(update(trained_hs, data), regexp = warning1)
-
-    kit <- update(train_depth(data[1:10, ], seed = 246),
-                  data[11:nrow(data), ], add = TRUE)
-    expect_identical(kit, train_depth(data, seed = 246))
-
-    warning2 <- "Due to new modified Data, new splitpoints are drawn randomly"
-    expect_warning(update(trained_hs, data[20:30, ]), regexp = warning2)
   }
 })
 

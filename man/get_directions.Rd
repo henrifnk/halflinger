@@ -12,10 +12,11 @@ get_directions(n_halfspace, dims = 2)
 \item{dims}{dimensions of space to draw directions from}
 }
 \value{
-a \code{dims} x \code{n_halfspace} matrix of \code{n_halfspace} \code{dims}-dimensional
-directions
+\code{dims} x \code{n_halfspace} matrix of \code{n_halfspace} \code{dims}-dimensional directions
 }
 \description{
-Uniformly sample \code{n_halfspace} \code{dims}-dimensional direction
-vectors
+Uniformly sample \code{n_halfspace} \code{dims}-dimensional direction vectors
+}
+\seealso{
+\code{\link[=train_depth]{train_depth()}}
 }

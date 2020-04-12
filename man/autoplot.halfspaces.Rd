@@ -15,8 +15,8 @@
 )
 }
 \arguments{
-\item{object}{a halfspaces object containing a list arbitrary length of
-halfspace objects.}
+\item{object}{a \code{\link[=halfspaces]{halfspaces()}} object containing a list arbitrary length of
+\code{\link[=halfspace]{halfspace()}} objects.}
 
 \item{data}{numeric matrix or dataframe; \strong{rows} are vectors to project}
 
@@ -24,42 +24,42 @@ halfspace objects.}
 
 \item{points}{logical; should datapoints be plotted? default = TRUE}
 
-\item{type}{char; choice between "heatmap" and "contour lines"}
+\item{type}{char; choice between "heatmap" and "contour lines" plot}
 
-\item{grid}{numeric dataframe or matrix defining the grid to plot at;
-default = NULL}
+\item{grid}{numeric dataframe or matrix defining the grid to plot at,
+grid must contain the same colnames as data; default = NULL}
 
 \item{gridlength}{integer indicating grid length, to compute a grid on,
 is ignored if \code{grid} is not NULL; default =  70L}
 }
+\value{
+ggplot2 object; either a heatmap or a contour-line-plot in range of
+the grid
+}
 \description{
-Autoplot-Method to \code{\link[=train_depth]{train_depth()}} for halfspaces objects.
-Plot Halfspace depth/mass in two-dimensional grid\preformatted{Method generates a additive ggplot object by 2 Steps:
-* 1st Step [design_grid()]
+Autoplot-Method to \code{\link[=train_depth]{train_depth()}} for \code{\link[=halfspaces]{halfspaces()}} objects.
+Plot Halfspace depth/mass in two-dimensional grid.
+
+Method generates a ggplot object by 3 Steps:
+\itemize{
+\item 1st Step \code{\link[=design_grid]{design_grid()}}:
 Creates grid, predicts on it and saves it as database in a ggplot object.
-* 2nd Step [add_tile()] or [add_contour()] and/or [add_points()]
+\item 2nd Step \code{\link[=add_tile]{add_tile()}} or \code{\link[=add_contour]{add_contour()}} and/or \code{\link[=add_points]{add_points()}}:
 Adds layers objects tile, contour and points to the grid, by argument
 specification
-* 3rd Step Labs 'n beauty
-Add lab aspects depending on `metric` for intelligibility and theme for
+\item 3rd Step Labs 'n beauty:
+Add lab aspects depending on \code{metric} for intelligibility and theme for
 beauty to the grid
 }
 }
-\section{Functions}{
-\itemize{
-\item \code{autoplot.halfspaces}: ggplot2 object; either a heatmap od a
-contour-line-plot in range of the grid
-}}
-
 \examples{
-    library(halflinger)
+library(halflinger)
 
-    data <- matrix(c(rnorm(100), rnorm(100, 1, 5)), ncol = 2)
-    train_data <- train_depth(data, n_halfspace = 100, seed = 123)
-    \dontrun{autoplot.halfspaces(train_data, data, type = "contour")}
+data <- matrix(c(rnorm(100), rnorm(100, 1, 5)), ncol = 2)
+train_data <- train_depth(data, n_halfspace = 100, seed = 123)
+\dontrun{autoplot.halfspaces(train_data, data, type = "contour")}
 
 }
 \seealso{
-\preformatted{[train_depth()], [update.halfspaces()], [predict.halfspaces()]
-}
+\code{\link[=train_depth]{train_depth()}}, \code{\link[=update.halfspaces]{update.halfspaces()}}, \code{\link[=predict.halfspaces]{predict.halfspaces()}}
 }

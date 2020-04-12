@@ -5,7 +5,7 @@
 \alias{new_halfspace}
 \alias{is_halfspace}
 \alias{validate_halfspace}
-\title{Define Class halfspace}
+\title{Define S3-class halfspace}
 \usage{
 halfspace(normal, split, mass_above, col_data)
 
@@ -16,9 +16,9 @@ is_halfspace(object, col_data)
 validate_halfspace(object, col_data)
 }
 \arguments{
-\item{normal}{a vector of indicating a direction in space}
+\item{normal}{a vector indicating a direction in space}
 
-\item{split}{"offset" of the halfspace boundary along its normal vector}
+\item{split}{output from \code{\link[=sample_split]{sample_split()}}}
 
 \item{mass_above}{a vector with relative data frequency "at or above" the
 split}
@@ -30,9 +30,11 @@ split}
 \description{
 Define a new S3 class \code{halfspace}.
 Structure of class definition:
-* interface
-* constructor
-* validator
+\itemize{
+\item interface
+\item constructor
+\item validator
+}
 }
 \section{Functions}{
 \itemize{
@@ -44,7 +46,7 @@ and a measure of mass \code{\link[=train_depth]{train_depth()}}, \code{\link[=up
 
 \item \code{is_halfspace}: check on structur of halfspace object w.r.t data
 
-\item \code{validate_halfspace}: validate structur of halfspace object
+\item \code{validate_halfspace}: validate structure of halfspace object
 }}
 
 \seealso{

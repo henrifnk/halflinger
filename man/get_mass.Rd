@@ -12,8 +12,8 @@ get_depth(data, object)
 \arguments{
 \item{data}{numeric matrix or dataframe; \strong{rows} are vectors to project}
 
-\item{object}{a halfspaces object containing a list arbitrary length of
-halfspace objects.}
+\item{object}{a \code{\link[=halfspaces]{halfspaces()}} object containing a list arbitrary length of
+\code{\link[=halfspace]{halfspace()}} objects.}
 }
 \description{
 These functions calculate a prediction on depth/mass of data
@@ -30,3 +30,6 @@ initialized in 1 the algorithm iteratively searches in each halfspace
 for the minimal masses of each observation
 }}
 
+\seealso{
+\code{\link[=predict.halfspaces]{predict.halfspaces()}}
+}

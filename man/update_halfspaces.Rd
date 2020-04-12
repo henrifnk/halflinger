@@ -7,8 +7,8 @@
 update_halfspaces(object, complete_data, n_halfspace, input)
 }
 \arguments{
-\item{object}{a halfspaces object containing a list arbitrary length of
-halfspace objects.}
+\item{object}{a \code{\link[=halfspaces]{halfspaces()}} object containing a list arbitrary length of
+\code{\link[=halfspace]{halfspace()}} objects.}
 
 \item{complete_data}{A data set with all containing required unique
 observations to \code{\link[=train_depth]{train_depth()}}}
@@ -18,20 +18,24 @@ observations to \code{\link[=train_depth]{train_depth()}}}
 \item{input}{the parameter set an object was trained on}
 }
 \value{
-A data set that is ready to update \code{\link[=train_depth]{train_depth()}} on
+updated halfspaces from \code{object}
 }
 \description{
-This function updates the already drawn \code{halfspaces} of the
-input \code{object}.
+This function updates the already drawn \code{halfspace} objects from input
+\code{object}.
 
 Functionality splits in two scenarios:
 \itemize{
-\item Scenario for an unchanged dataset
-if dataset remains unchanged, halfspace objects are identical, too
-drawn halfspaces are a subset of \code{object}
-\item Scenario for a changed dataset
-if dataset changes, new randomly drawn subsamples are needed which provide
-a new base for splitpoint criteria and mass_above, therefore whole
-<get_halfspaces> needs to be recalled on each direction of the dataset
+\item Scenario for an unchanged dataset:
+if \code{data} are equal to train data in \code{object}, halfspace objects are
+identical, too. And drawn halfspaces are a subset of \code{object}
+\item Scenario for a changed dataset:
+if \code{data} and train_data in \code{object} are not identical, new randomly drawn
+subsamples are drawn which provide a new base for splitpoint criteria and
+mass_above, therefore whole \code{\link[=train_depth]{train_depth()}} needs to be recalled on each
+direction of the dataset
 }
+}
+\seealso{
+\code{\link[=update.halfspaces]{update.halfspaces()}}
 }

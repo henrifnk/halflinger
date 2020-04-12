@@ -30,10 +30,9 @@ generate_plot_faith(
 \arguments{
 \item{n_halfspace}{number of halfsspaces to draw, default = 1e4}
 
-\item{subsample}{what proportion of data to use for each halfspace
-estimation, default = 1}
+\item{subsample}{what proportion of data to use for each \code{\link[=halfspace]{halfspace()}} estimation, default = 1}
 
-\item{scope}{minimum 1; controls size of region of convexity for halfspace
+\item{scope}{minimum 1; controls size of region of convexity for \code{\link[=halfspace]{halfspace()}}
 mass (\eqn{\lambda} in the paper) i.e., how far outside of sampled data
 range the sampled hyperplanes can lie; default = 1}
 
@@ -47,10 +46,10 @@ range the sampled hyperplanes can lie; default = 1}
 
 \item{points}{logical; should datapoints be plotted? default = TRUE}
 
-\item{type}{char; choice between "heatmap" and "contour lines"}
+\item{type}{char; choice between "heatmap" and "contour lines" plot}
 
-\item{grid}{numeric dataframe or matrix defining the grid to plot at;
-default = NULL}
+\item{grid}{numeric dataframe or matrix defining the grid to plot at,
+grid must contain the same colnames as data; default = NULL}
 
 \item{gridlength}{integer indicating grid length, to compute a grid on,
 is ignored if \code{grid} is not NULL; default =  70L}
@@ -61,7 +60,7 @@ This functions are helpers to unit tests.
 \section{Functions}{
 \itemize{
 \item \code{generate_train_data}: generates datasets in order to approve, the
-functionality of \code{\link[=train_depth]{train_depth()}}, \code{\link[=update.halfspaces]{update.halfspaces()}},
+functionality of \code{\link[=train_depth]{train_depth()}}, \code{\link[=update.halfspaces]{update.halfspaces()}} &
 \code{\link[=predict.halfspaces]{predict.halfspaces()}}
 
 \item \code{generate_plot_faith}: possibility to tune over all defaults of

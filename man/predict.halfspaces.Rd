@@ -7,8 +7,8 @@
 \method{predict}{halfspaces}(object, data, metric = c("mass", "depth"), ...)
 }
 \arguments{
-\item{object}{a halfspaces object containing a list arbitrary length of
-halfspace objects.}
+\item{object}{a \code{\link[=halfspaces]{halfspaces()}} object containing a list arbitrary length of
+\code{\link[=halfspace]{halfspace()}} objects.}
 
 \item{data}{numeric matrix or dataframe; \strong{rows} are vectors to project}
 
@@ -21,30 +21,30 @@ numeric vector with depth metric values for data: either halfspace
 mass or halfspace depth
 }
 \description{
-Predict-Method to \code{\link[=train_depth]{train_depth()}} for halfspaces objects.
-Evaluates halfspace-mass or (approximate) -depth for points in
-data based\preformatted{Functionality splits by `metric` in in two main scenarios:
-* Scenario [get_mass()]
-`metric = "mass"` computes approximate halfspace mass
-* Scenario [get_depth()]
-`metric = "depth"` computes approximate halfspace depth ("Tukey depth")
+Predict-Method to \code{\link[=train_depth]{train_depth()}} for \code{\link[=halfspaces]{halfspaces()}} objects.
+Evaluates halfspace-mass or (approximate) -depth for points in \code{data}
+
+Functionality splits by \code{metric} in in two main scenarios:
+\itemize{
+\item Scenario \code{\link[=get_mass]{get_mass()}}:
+\code{metric = "mass"} computes approximate halfspace mass
+\item Scenario \code{\link[=get_depth]{get_depth()}}:
+\code{metric = "depth"} computes approximate halfspace depth ("Tukey depth")
 }
 }
 \examples{
-   library(halflinger)
+library(halflinger)
 
-   data <- matrix(c(rnorm(100), rnorm(100, 1, 5)), ncol = 2)
-   train_data <- train_depth(data[51:100, ], n_halfspace = 100, seed = 123)
-   predict(train_data, data[1:50, ])
+data <- matrix(c(rnorm(100), rnorm(100, 1, 5)), ncol = 2)
+train_data <- train_depth(data[51:100, ], n_halfspace = 100, seed = 123)
+predict(train_data, data[1:50, ])
 }
 \references{
-\preformatted{Chen, B., Ting, K.M., Washio, T. et al.,
+Chen, B., Ting, K.M., Washio, T. et al.,
 Mach Learn (2015): 100(2):677--699
 Half-space mass a maximally robust and efficient data depth method
 \url{https://doi.org/10.1007/s10994-015-5524-x}
 }
-}
 \seealso{
-\preformatted{[train_depth()], [update.halfspaces()], [autoplot.halfspaces()]
-}
+\code{\link[=train_depth]{train_depth()}}, \code{\link[=update.halfspaces]{update.halfspaces()}}, \code{\link[=autoplot.halfspaces]{autoplot.halfspaces()}}
 }
